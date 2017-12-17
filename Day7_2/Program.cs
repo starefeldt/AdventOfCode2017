@@ -26,8 +26,6 @@ namespace Day7_2
 
 			List<TowerProgram> towers = GetTowers(data);
 			var rootTower = GetRoot(towers);
-			var rootChildSums = new List<int>();
-
 			SetIncorrectTower(rootTower);
 			var result = _incorrectTower.Weight - _difference;
 
@@ -46,7 +44,7 @@ namespace Day7_2
 				rootChildSums.Add(_sum + child.Weight);
 			}
 
-			var grouped = rootChildSums.GroupBy(x => x);
+			var grouped = rootChildSums.GroupBy(weight => weight);
 
 			if (grouped.Count() > 1)
 			{
@@ -87,7 +85,7 @@ namespace Day7_2
 								count++;
 						}
 					}
-					if (count == 0)
+					if (count == 0)		//The only tower that is not anyone's child is Root
 						return tower;
 				}
 			}
