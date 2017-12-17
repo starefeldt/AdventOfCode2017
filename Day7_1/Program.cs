@@ -32,7 +32,7 @@ namespace Day7_1
 		{
 			foreach (var tower in towers)
 			{
-				int count = 0;
+				int childCount = 0;
 				if (tower.Children.Count != 0)
 				{
 					foreach (var compare in towers)
@@ -41,10 +41,10 @@ namespace Day7_1
 						{
 							var result = compare.Children.FirstOrDefault(x => x == tower.Name);
 							if (result != null)
-								count++;
+								childCount++;
 						}
 					}
-					if (count == 0)     //The only tower that is not anyone's child is Root
+					if (childCount == 0)     //The only tower that is not anyone's child is Root
 						return tower;
 				}
 			}
