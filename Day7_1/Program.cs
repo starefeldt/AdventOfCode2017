@@ -22,7 +22,14 @@ namespace Day7_1
 									   .Split('|');
 
 			List<TowerProgram> towers = GetTowers(data);
-			string root = "";
+			var rootTower = GetRoot(towers);
+			
+			Console.WriteLine(rootTower.Name);
+			Console.ReadLine();
+		}
+
+		private static TowerProgram GetRoot(List<TowerProgram> towers)
+		{
 			foreach (var tower in towers)
 			{
 				int count = 0;
@@ -37,15 +44,11 @@ namespace Day7_1
 								count++;
 						}
 					}
-					if (count == 0)
-					{
-						root = tower.Name;
-						break;
-					}
+					if (count == 0)     //The only tower that is not anyone's child is Root
+						return tower;
 				}
 			}
-			Console.WriteLine(root);
-			Console.ReadLine();
+			return null;
 		}
 
 		private static List<TowerProgram> GetTowers(string[] data)
