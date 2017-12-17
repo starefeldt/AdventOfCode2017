@@ -63,7 +63,6 @@ namespace Day7_2
 		private static void AddChildSums(TowerProgram tower)
 		{
 			_sum += tower.Children.Sum(x => x.Weight);
-
 			foreach (var child in tower.Children)
 				AddChildSums(child);
 		}
