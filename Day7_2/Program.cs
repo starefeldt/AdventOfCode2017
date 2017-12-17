@@ -84,7 +84,7 @@ namespace Day7_2
 								count++;
 						}
 					}
-					if (count == 0)		//The only tower that is not anyone's child is Root
+					if (count == 0)     //The only tower that is not anyone's child is Root
 						return tower;
 				}
 			}
