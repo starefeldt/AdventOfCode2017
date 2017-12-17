@@ -36,6 +36,7 @@ namespace Day7_2
 		private static void SetIncorrectTower(TowerProgram tower)
 		{
 			var rootChildSums = new List<int>();
+
 			foreach (var child in tower.Children)
 			{
 				_sum = 0;
