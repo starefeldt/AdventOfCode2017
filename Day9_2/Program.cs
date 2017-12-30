@@ -31,10 +31,7 @@ namespace Day9_2
 					sums.Add(sum);
 				}
 				else if (input[i] == '}')   //End Group
-				{
-					sums.Add(sum);
 					sum--;
-				}
 			}
 			return sums;
 		}
@@ -42,7 +39,6 @@ namespace Day9_2
 		private static StringBuilder RemoveUnwanted(StringBuilder input)
 		{
 			bool insideGarbage = false;
-			input.Replace("!!", "");
 			_garbageChars = 0;
 
 			for (int i = 0; i < input.Length; i++)
@@ -50,28 +46,22 @@ namespace Day9_2
 				char c = input[i];
 
 				if (c == '<' && !insideGarbage)
-				{
 					insideGarbage = true;
-				}
+				else if (c == '>' && insideGarbage)
+					insideGarbage = false;
+
 				else if (c == '!' && insideGarbage)
 				{
 					input.Remove(i + 1, 1);
 				}
-
 				else if ((c == '{' || c == '}') && insideGarbage)
 				{
 					input.Remove(i, 1);
 					i--;
 					_garbageChars++;
 				}
-				else if (c == '>' && insideGarbage)
-				{
-					insideGarbage = false;
-				}
 				else if (insideGarbage)
-				{
 					_garbageChars++;
-				}
 			}
 			return input;
 		}

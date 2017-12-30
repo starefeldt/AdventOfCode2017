@@ -12,13 +12,12 @@ namespace Day9_1
 		{
 			StringBuilder input = GetInput();
 			input = RemoveUnwanted(input);
-			var groups = GetGroups(input);
+			var groupCount = GetGroupCount(input);
 
-			Console.WriteLine(groups.Sum() / 2);
+			Console.WriteLine(groupCount.Sum());
 			Console.ReadLine();
 		}
-
-		private static List<int> GetGroups(StringBuilder input)
+		private static List<int> GetGroupCount(StringBuilder input)
 		{
 			var sums = new List<int>();
 			int sum = 0;
@@ -30,27 +29,24 @@ namespace Day9_1
 					sums.Add(sum);
 				}
 				else if (input[i] == '}')   //End Group
-				{
-					sums.Add(sum);
-					sum--;
-				}
+					sum--;					// Previous nested group will be one lower
 			}
 			return sums;
 		}
-
+		
 		private static StringBuilder RemoveUnwanted(StringBuilder input)
 		{
 			bool insideGarbage = false;
-			input.Replace("!!", "");
 
 			for (int i = 0; i < input.Length; i++)
 			{
 				char c = input[i];
 
 				if (c == '<' && !insideGarbage)
-				{
 					insideGarbage = true;
-				}
+				else if (c == '>' && insideGarbage)
+					insideGarbage = false;
+
 				else if (c == '!' && insideGarbage)
 				{
 					input.Remove(i + 1, 1);
@@ -58,11 +54,7 @@ namespace Day9_1
 				else if ((c == '{' || c == '}') && insideGarbage)
 				{
 					input.Remove(i, 1);
-					i--;
-				}
-				else if (c == '>' && insideGarbage)
-				{
-					insideGarbage = false;
+					i--;	//To not skip any characters because of Remove
 				}
 			}
 			return input;
