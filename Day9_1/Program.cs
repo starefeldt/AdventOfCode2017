@@ -28,7 +28,7 @@ namespace Day9_1
 					sum++;
 					sums.Add(sum);
 				}
-				else if (input[i] == '}')   //End Group
+				else if (input[i] == '}')   // End Group
 					sum--;					// Previous nested group will be one lower
 			}
 			return sums;

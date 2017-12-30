@@ -8,38 +8,19 @@ namespace Day9_2
 {
 	class Program
 	{
-		static int _garbageChars;
-
 		static void Main(string[] args)
 		{
 			StringBuilder input = GetInput();
-			RemoveUnwanted(input);
+			int garbageChars = GetGarbageChars(input);
 
-			Console.WriteLine(_garbageChars);
+			Console.WriteLine(garbageChars);
 			Console.ReadLine();
 		}
-
-		private static List<int> GetGroups(StringBuilder input)
-		{
-			var sums = new List<int>();
-			int sum = 0;
-			for (int i = 0; i < input.Length; i++)
-			{
-				if (input[i] == '{')
-				{
-					sum++;
-					sums.Add(sum);
-				}
-				else if (input[i] == '}')   //End Group
-					sum--;
-			}
-			return sums;
-		}
-
-		private static StringBuilder RemoveUnwanted(StringBuilder input)
+		
+		private static int GetGarbageChars(StringBuilder input)
 		{
 			bool insideGarbage = false;
-			_garbageChars = 0;
+			int garbageChars = 0;
 
 			for (int i = 0; i < input.Length; i++)
 			{
@@ -58,12 +39,12 @@ namespace Day9_2
 				{
 					input.Remove(i, 1);
 					i--;
-					_garbageChars++;
+					garbageChars++;
 				}
 				else if (insideGarbage)
-					_garbageChars++;
+					garbageChars++;
 			}
-			return input;
+			return garbageChars;
 		}
 
 		private static StringBuilder GetInput()
